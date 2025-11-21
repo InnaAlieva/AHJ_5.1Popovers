@@ -1,5 +1,7 @@
+
 import puppeteer from 'puppeteer';
 import { fork } from 'child_process';
+import path from 'path';
 
 jest.setTimeout(60000);
 
@@ -10,7 +12,9 @@ describe('test', () => {
   const baseUrl = 'http://localhost:8888';
 
   beforeAll(async () => {
-    server = fork(`${__dirname}/../../../server.js`);
+    // Абсолютный путь к server.js в корне проекта
+    const serverPath = path.resolve(__dirname, '../../../../server.js');
+    server = fork(serverPath);
 
     await new Promise((resolve, reject) => {
       server.on('error', reject);
