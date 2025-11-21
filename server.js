@@ -5,26 +5,24 @@ const url = require('url');
 
 const PORT = 8888;
 
-
 const server = http.createServer(async (req, res) => {
   try {
-   
     if (req.url === '/' || req.url === '/index.html') {
       const filePath = path.join(__dirname, 'src', 'index.html');
       const content = await fs.readFile(filePath);
       
-      res.writeHead(200, { 
+      res.writeHead(200, {
         'Content-Type': 'text/html; charset=utf-8',
         'Cache-Control': 'no-store'
       });
       res.end(content);
-    } 
-
-    else {
+    } else {
       res.writeHead(404);
       res.end('Not Found');
     }
   } catch (err) {
+    // Отключаем предупреждение для этой строки
+    // eslint-disable-next-line no-console
     console.error('Ошибка сервера:', err);
     res.writeHead(500);
     res.end('Внутренняя ошибка сервера');
@@ -32,9 +30,10 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
+  // Отключаем предупреждение для этой строки
+  // eslint-disable-next-line no-console
   console.log(`Сервер запущен: http://localhost:${PORT}`);
-  
- 
+
   if (process.send) {
     process.send('server-ready');
   }
@@ -42,6 +41,8 @@ server.listen(PORT, () => {
 
 process.on('SIGINT', () => {
   server.close(() => {
+    // Отключаем предупреждение для этой строки
+    // eslint-disable-next-line no-console
     console.log('Сервер остановлен');
     process.exit(0);
   });
