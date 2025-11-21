@@ -9,9 +9,12 @@ describe('test', () => {
   let server = null;
   const baseUrl = 'http://localhost:8888';
 
+  
   beforeAll(async () => {
-    // Запускаем сервер
-    server = fork(`${__dirname}/../server.js`);
+    browser = await puppetteer.launch();
+
+    page = await browser.newPage();
+  });
 
     await new Promise((resolve, reject) => {
       server.on('error', reject);
