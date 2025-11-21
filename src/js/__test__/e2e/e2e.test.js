@@ -7,7 +7,7 @@ describe("test", () => {
   const baseUrl = "http://localhost:8888";
 
   beforeAll(async () => {
-    browser = await puppetteer.launch();
+    browser = await puppeteer.launch();
 
     page = await browser.newPage();
   });
