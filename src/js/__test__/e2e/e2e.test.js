@@ -1,4 +1,4 @@
-import puppetteer from "puppeteer";
+import puppeteer from "puppeteer";
 
 jest.setTimeout(60000); // default puppeteer timeout
 describe("test", () => {
